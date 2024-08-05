@@ -1,16 +1,19 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
 import './App.css';
 import CalculatorStateProvider from './context/CalculatorStateProvider';
+import Display from './components/Display/DisplayContainer';
+import Keys from './components/Keys/KeysContainer';
 
-function Hello() {
+function Calculator() {
   return (
-    <div className="container">
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
+    <>
+      <div className="sub-container display-container">
+        <Display />
       </div>
-      <h1>electron-calculator</h1>
-    </div>
+      <div className="sub-container keys-container">
+        <Keys />
+      </div>
+    </>
   );
 }
 
@@ -19,7 +22,7 @@ export default function App() {
     <CalculatorStateProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Hello />} />
+          <Route path="/" element={<Calculator />} />
         </Routes>
       </Router>
     </CalculatorStateProvider>

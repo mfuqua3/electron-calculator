@@ -4,14 +4,9 @@
  */
 body {
   position: relative;
-  color: white;
+  background-color: #202020;
+  color: #f7f7f7;
   height: 100vh;
-  background: linear-gradient(
-    200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
-  );
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
@@ -54,13 +49,15 @@ a:hover {
   text-decoration: none;
 }
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100vh;
+  height: 100vh;
 }
-.Hello {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+.sub-container {
+  width: 100%;
+}
+.display-container{
+  height: 30%;
+}
+.keys-container{
+  height:70%
 }
