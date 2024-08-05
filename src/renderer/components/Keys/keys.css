@@ -1,0 +1,45 @@
+.keys-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  height: 100%;
+  width: 100%;
+  gap: 5px;
+}
+.key-button:focus{
+  outline: none;
+  box-shadow: none;
+}
+.key-button {
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  appearance: none;
+  font-size: 1.3rem;
+  box-shadow: 0px 8px 28px -6px rgba(24, 39, 75, 0.12),
+    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+  transition: all ease-in 0.1s;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.key-button:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.key-button-finalizer {
+  background-color: #76b9ed;
+}
+
+.key-button-finalizer:hover {
+  background-color: #6da9d8;
+}
+
+.key-button-operand, .key-button-modifier, .key-button-operator:hover {
+  background-color: #3c3c3c;
+}
+.key-button-operand:hover, .key-button-modifier:hover, .key-button-operator {
+  background-color: #323232;
+}

@@ -1,0 +1,55 @@
+.display-box {
+  flex: 1;
+  height: 95%;
+  border-radius: 10px;
+  opacity: 0.4;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+.display-box-container{
+  display: flex;
+  flex-direction: row;
+}
+.display-box-0, .display-box-2, .display-box-4 {
+  height: 3%;
+}
+.display-box-1, .display-box-3 {
+  height: 43%;
+}
+.short-width{
+  width: 10%;
+}
+.long-width{
+  width: 80%;
+}
+.diamond {
+  clip-path: polygon(0% 40%, 0% 60%, 40% 100%, 60% 100%, 100% 60%, 100% 40%, 60% 0%, 40% 0%);
+}
+.horizontal-bar{
+  clip-path: polygon(0% 0%, 5% 100%, 100% 100%, 95% 0%);
+}
+.vertical-bar{
+  clip-path: polygon(0% 0%, 100% 5%, 100% 100%, 0% 95%);
+}
+.illuminated{
+  background-color: white;
+}
+.display-box-middle {
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+  padding: 5%;
+}
+.display-box-middle-border{
+  width: 10%;
+}
+.display-box-center {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.display {
+  display: flex;
+  height: 100%;
+}
