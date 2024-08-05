@@ -18,6 +18,7 @@ function Calculator() {
   }, [mainDisplay]);
   function handleKeyDown(event: KeyboardEvent) {
     const { code } = event;
+    console.log(code);
     const keyMap: Record<string, () => void> = {
       Delete: () => keys.clear(),
       NumpadEnter: () => keys.applyOperator(Operator.Equals),

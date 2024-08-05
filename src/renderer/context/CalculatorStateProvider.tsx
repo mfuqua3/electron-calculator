@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { createContext, ReactNode, useState } from 'react';
+import { raw } from 'concurrently/dist/src/defaults';
 import {
   ErrorCodes,
   executeOperation,
@@ -65,17 +66,12 @@ function CalculatorStateProvider({
     }
     setDisplay(newValue);
     setIsDirty(true);
-    console.log(display);
-    console.log(newValue);
     return true;
   }
   function toggleNegative() {
     setNegative((curr) => !curr);
   }
   function resolvePendingOperator() {
-    if (!isDirty) {
-      return value;
-    }
     if (pendingOperator === null) {
       setValue(parseFloat(display));
       return value;
@@ -89,7 +85,9 @@ function CalculatorStateProvider({
     return result;
   }
   function format(rawValue: number): string {
-    let valueString = rawValue.toString();
+    let valueString = parseFloat(
+      Number(rawValue).toFixed(MaxDisplayLength),
+    ).toString();
     const indexOfDecimal = valueString.indexOf('.');
     const minimumPrecision =
       indexOfDecimal > 0
@@ -101,18 +99,17 @@ function CalculatorStateProvider({
     }
     while (
       valueString.length >
-      MaxDisplayLength + (indexOfDecimal > 0 ? 1 : 0)
+      MaxDisplayLength + (indexOfDecimal > 0 ? 0 : -1)
     ) {
-      valueString = valueString.slice(0, valueString.length);
+      valueString = valueString.slice(0, valueString.length - 1);
     }
     return valueString;
   }
   function applyOperator(operator: Operator) {
-    if (!isDirty && display === '0') {
-      return;
+    if (isDirty) {
+      const resolvedValue = resolvePendingOperator();
+      setDisplay(format(resolvedValue));
     }
-    const resolvedValue = resolvePendingOperator();
-    setDisplay(format(resolvedValue));
     if (operator !== Operator.Equals) {
       setPendingOperator(operator);
     } else {
