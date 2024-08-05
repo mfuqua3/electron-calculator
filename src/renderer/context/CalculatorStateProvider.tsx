@@ -74,9 +74,9 @@ function CalculatorStateProvider({
   function resolvePendingOperator() {
     if (pendingOperator === null) {
       setValue(parseFloat(display));
-      return value;
+      return value * (negative ? -1 : 1);
     }
-    const operands = [value, parseFloat(display)];
+    const operands = [value * (negative ? -1 : 1), parseFloat(display)];
     const result = executeOperation(operands, pendingOperator);
     if (Number.isNaN(result)) {
       setError(ErrorCodes.DivideByZero);
@@ -106,6 +106,11 @@ function CalculatorStateProvider({
     return valueString;
   }
   function applyOperator(operator: Operator) {
+    if (!isDirty && operator === Operator.Subtract) {
+      toggleNegative();
+      setDisplay('0');
+      return;
+    }
     if (isDirty) {
       const resolvedValue = resolvePendingOperator();
       setDisplay(format(resolvedValue));
@@ -116,12 +121,13 @@ function CalculatorStateProvider({
       setPendingOperator(null);
     }
     setIsDirty(false);
+    setNegative(false);
   }
 
   return (
     <CalculatorContext.Provider
       value={{
-        display: isDirty && negative ? `-${display}` : display,
+        display: negative ? `-${display}` : display,
         hasError: error !== null,
         pendingOperator,
         appendKey,
