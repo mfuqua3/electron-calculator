@@ -13,7 +13,8 @@ function useKeys() {
     applyNumber: (key: number) => state.appendKey(key),
     applyDecimal: () => state.appendKey('.'),
     applyOperator: (operator: Operator) => state.applyOperator(operator),
-    clear: () => state.clear(),
+    toggleNegative: state.toggleNegative,
+    clear: state.clear,
   };
 }
 

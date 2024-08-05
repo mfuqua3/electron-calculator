@@ -12,9 +12,11 @@ import {
 
 export interface CalculatorState {
   display: string;
+  negative: boolean;
   pendingOperator: Operator | null;
   appendKey: (key: ValueKey) => boolean;
   applyOperator: (operator: Operator) => void;
+  toggleNegative: () => void;
   clear: () => void;
 }
 
@@ -27,6 +29,7 @@ function CalculatorStateProvider({
 }) {
   const [error, setError] = useState<ErrorCodes | null>(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [negative, setNegative] = useState(false);
   const [display, setDisplay] = useState('0');
   const [pendingOperator, setPendingOperator] = useState<Operator | null>(null);
   const [value, setValue] = useState(0);
@@ -61,6 +64,9 @@ function CalculatorStateProvider({
     setDisplay((curr) => curr + key.toString());
     setIsDirty(true);
     return true;
+  }
+  function toggleNegative() {
+    setNegative((curr) => !curr);
   }
   function resolvePendingOperator() {
     if (pendingOperator === null) {
@@ -113,6 +119,8 @@ function CalculatorStateProvider({
         appendKey,
         applyOperator,
         clear,
+        negative,
+        toggleNegative,
       }}
     >
       {children}
