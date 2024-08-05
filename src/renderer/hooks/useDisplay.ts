@@ -12,6 +12,7 @@ function useDisplay() {
     mainDisplay: state.display,
     pendingOperator: state.pendingOperator,
     isNegative: state.negative,
+    hasError: state.hasError,
   };
 }
 

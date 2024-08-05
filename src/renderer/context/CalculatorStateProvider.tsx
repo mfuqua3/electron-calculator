@@ -12,6 +12,7 @@ import {
 
 export interface CalculatorState {
   display: string;
+  hasError: boolean;
   negative: boolean;
   pendingOperator: Operator | null;
   appendKey: (key: ValueKey) => boolean;
@@ -49,6 +50,7 @@ function CalculatorStateProvider({
     return toValidate.length <= maxLength;
   }
   function appendKey(key: ValueKey): boolean {
+    console.log(key);
     if (error) {
       clear();
     }
@@ -57,11 +59,12 @@ function CalculatorStateProvider({
         return false;
       }
     }
-    const newValue = `${display}${key.toString}`;
+    const newValue = isDirty ? `${display}${key.toString()}` : key.toString();
     if (!validateLength(newValue)) {
       return false;
     }
-    setDisplay((curr) => curr + key.toString());
+    console.log(newValue);
+    setDisplay(newValue);
     setIsDirty(true);
     return true;
   }
@@ -69,7 +72,11 @@ function CalculatorStateProvider({
     setNegative((curr) => !curr);
   }
   function resolvePendingOperator() {
+    if (!isDirty) {
+      return value;
+    }
     if (pendingOperator === null) {
+      setValue(parseFloat(display));
       return value;
     }
     const operands = [value, parseFloat(display)];
@@ -114,7 +121,8 @@ function CalculatorStateProvider({
   return (
     <CalculatorContext.Provider
       value={{
-        display: error ?? display,
+        display,
+        hasError: error !== null,
         pendingOperator,
         appendKey,
         applyOperator,
