@@ -14,6 +14,7 @@ export interface CalculatorState {
   display: string;
   hasError: boolean;
   negative: boolean;
+  isDirty: boolean;
   pendingOperator: Operator | null;
   appendKey: (key: ValueKey) => boolean;
   applyOperator: (operator: Operator) => void;
@@ -50,7 +51,6 @@ function CalculatorStateProvider({
     return toValidate.length <= maxLength;
   }
   function appendKey(key: ValueKey): boolean {
-    console.log(key);
     if (error) {
       clear();
     }
@@ -63,9 +63,10 @@ function CalculatorStateProvider({
     if (!validateLength(newValue)) {
       return false;
     }
-    console.log(newValue);
     setDisplay(newValue);
     setIsDirty(true);
+    console.log(display);
+    console.log(newValue);
     return true;
   }
   function toggleNegative() {
@@ -107,13 +108,15 @@ function CalculatorStateProvider({
     return valueString;
   }
   function applyOperator(operator: Operator) {
-    if (!isDirty) {
+    if (!isDirty && display === '0') {
       return;
     }
     const resolvedValue = resolvePendingOperator();
     setDisplay(format(resolvedValue));
     if (operator !== Operator.Equals) {
       setPendingOperator(operator);
+    } else {
+      setPendingOperator(null);
     }
     setIsDirty(false);
   }
@@ -121,12 +124,13 @@ function CalculatorStateProvider({
   return (
     <CalculatorContext.Provider
       value={{
-        display,
+        display: isDirty && negative ? `-${display}` : display,
         hasError: error !== null,
         pendingOperator,
         appendKey,
         applyOperator,
         clear,
+        isDirty,
         negative,
         toggleNegative,
       }}

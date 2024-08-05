@@ -10,11 +10,14 @@ function useKeys() {
     );
   }
   return {
-    applyNumber: (key: number) => state.appendKey(key),
+    applyNumber: (key: number) => {
+      state.appendKey(key);
+    },
     applyDecimal: () => state.appendKey('.'),
     applyOperator: (operator: Operator) => state.applyOperator(operator),
     toggleNegative: state.toggleNegative,
     clear: state.clear,
+    isDirty: state.isDirty,
   };
 }
 

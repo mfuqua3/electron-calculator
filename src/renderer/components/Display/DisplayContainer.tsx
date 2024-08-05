@@ -9,10 +9,19 @@ function DisplayContainer() {
   const displayState = useDisplay();
   function getCharacter(index: number): string | undefined {
     if (displayState.hasError) {
-      if (index === MaxDisplayLength - 3) {
+      if (index === MaxDisplayLength - 5) {
         return 'E';
       }
-      if (index > MaxDisplayLength - 3) {
+      if (index === MaxDisplayLength - 2) {
+        return 'O';
+      }
+      if (
+        [
+          MaxDisplayLength - 4,
+          MaxDisplayLength - 3,
+          MaxDisplayLength - 1,
+        ].includes(index)
+      ) {
         return 'R';
       }
       return undefined;

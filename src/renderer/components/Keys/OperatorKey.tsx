@@ -1,6 +1,6 @@
 import React from 'react';
 import { Operator } from '../../utils';
-import { useKeys } from '../../hooks';
+import { useDisplay, useKeys } from '../../hooks';
 import KeyButton, { KeyButtonCategory } from './Key';
 
 export interface OperatorButtonProps {
@@ -8,10 +8,12 @@ export interface OperatorButtonProps {
 }
 function OperatorKey({ operator }: OperatorButtonProps) {
   const { applyOperator } = useKeys();
+  const { pendingOperator } = useDisplay();
   return (
     <KeyButton
       onClick={() => applyOperator(operator)}
       category={KeyButtonCategory.Operator}
+      highlighted={operator === pendingOperator}
       label={operator}
     />
   );

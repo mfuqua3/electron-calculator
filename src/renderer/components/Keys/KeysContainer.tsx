@@ -6,33 +6,36 @@ import { Operator } from '../../utils';
 import ClearKey from './ClearKey';
 import DecimalKey from './DecimalKey';
 import EqualsKey from './EqualsKey';
-// 7 8 9 +
-// 4 5 6 -
-// 1 2 3 x
-// C 0 = /
+import ToggleNegativeKey from './ToggleNegativeKey';
 
 function KeysContainer() {
   return (
     <div className="keys-grid">
       <React.Fragment key="row-0">
+        <ToggleNegativeKey />
+        <div />
+        <div />
+        <OperatorKey operator={Operator.Divide} />
+      </React.Fragment>
+      <React.Fragment key="row-1">
         <ValueKey value={7} />
         <ValueKey value={8} />
         <ValueKey value={9} />
-        <OperatorKey operator={Operator.Add} />
+        <OperatorKey operator={Operator.Multiply} />
       </React.Fragment>
-      <React.Fragment key="row-1">
+      <React.Fragment key="row-2">
         <ValueKey value={4} />
         <ValueKey value={5} />
         <ValueKey value={6} />
         <OperatorKey operator={Operator.Subtract} />
       </React.Fragment>
-      <React.Fragment key="row-2">
+      <React.Fragment key="row-3">
         <ValueKey value={1} />
         <ValueKey value={2} />
         <ValueKey value={3} />
-        <OperatorKey operator={Operator.Multiply} />
+        <OperatorKey operator={Operator.Add} />
       </React.Fragment>
-      <React.Fragment key="row-3">
+      <React.Fragment key="row-4">
         <ClearKey />
         <ValueKey value={0} />
         <DecimalKey />
