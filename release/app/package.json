@@ -1,12 +1,12 @@
 {
-  "name": "electron-react-boilerplate",
-  "version": "4.6.0",
-  "description": "A foundation for scalable desktop apps",
+  "name": "electron-calculator",
+  "version": "1.0.0",
+  "description": "A simple arithmetic calculator app built using React and Electron, primarily as a learning environment for the Electron framework.",
   "license": "MIT",
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
-    "url": "https://github.com/electron-react-boilerplate"
+    "name": "Matt Fuqua",
+    "email": "fuqua.matt@gmail.com",
+    "url": "https://www.mattfuqua.dev"
   },
   "main": "./dist/main/main.js",
   "scripts": {

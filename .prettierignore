@@ -1,0 +1,10 @@
+# Add files here to ignore them from prettier formatting
+/dist
+/coverage
+/.nx/cache
+/libs/**/src/generated
+# Lots of long lines of columnated data here that becomes pretty unwieldy to manage
+#   when prettier keeps formatting a line into multiple lines.
+# This could potentially be removed once this seed is more formalized and no longer
+#   requires regular changes.
+**/*-CostCenterSeed.ts
